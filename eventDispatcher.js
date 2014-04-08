@@ -1,3 +1,23 @@
+// this code doesn't work !! - it can't identify the method register
+function eventDispatcher(element, eventType) {
+    var obj = {
+        register: function (filterClass, fun) {
+            var children = element.childList;
+            for (var item in children) {
+                if (typeof filterClass === "undefined") {
+                    if (String(element.className).split(/\s/).indexOf(filterClass) >= 0)
+                        item.addEventListener(eventType, fun, false);
+                }
+                else if (item.type === eventType) {
+                    item.addEventListener(eventType, fun, false);
+                }
+            }
+        }
+    }
+    return obj;
+}
+
+/*
 function eventDispatcher(element, eventType) {
 
     return {
@@ -18,3 +38,5 @@ function eventDispatcher(element, eventType) {
         }
     };
 }
+*/
+
